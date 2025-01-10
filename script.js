@@ -84,7 +84,7 @@ const displayFetchDataOnscreen = () => {
     productdetails.innerHTML=""
   }
 
-  fetchDataOnCart(data);
+  fetchDataOnCart();
 };
 
 // change subtotal when quantity upgrade
@@ -107,24 +107,35 @@ const changeSubtotal = (htmlElement, price) => {
 
     document.querySelector(".product-subtotal").textContent = `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`;
 
-    fetchDataOnCart(getDataFromLocalStorage)
+    fetchDataOnCart()
   });
 };
 
 // handle delete
 const handleDelete = () => {
   const deleteBtn = document.querySelector(".product-delete");
+  const modal = document.querySelector(".modal")
+  const modalBackGround = document.querySelector(".modal-background")
+
   deleteBtn.addEventListener("click", () => {
-    localStorage.removeItem(`cart-info`);
-    displayFetchDataOnscreen();
+    modal.classList.remove("modal-hide");
+    modal.classList.add('modal-show')
+    modalBackGround.classList.add("modal-background-color")
+    modalFuncationality(modal)
   });
 };
 
 // fetch data on cart
-const fetchDataOnCart = (data) => {
+const fetchDataOnCart = () => {
+  let data = JSON.parse(localStorage.getItem(`cart-info`));
   const subTotalCart = document.querySelector(".cart-subTotal-price .cart-subtotal")
   const totalCart = document.querySelector(".cart-total-price .cart-subtotal")
-  let totalPrice = ((data.quantity * data.price)/100).toString();
+
+  let totalPrice = 0;
+  if(data) {
+    totalPrice = ((data.quantity * data.price)/100).toString();
+  }
+  
   let formattedPrice = new Intl.NumberFormat('en-IN', {
     style: 'currency',
     currency: 'INR',
@@ -141,4 +152,42 @@ const fetchDataOnCart = (data) => {
         ? `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`
         : "₹ 0"
     }`;
+}
+
+
+// modal
+const modalFuncationality = (modal) => {
+  const cancleBtn = document.querySelector(".modal-cancle-btn")
+  const yesBtn = document.querySelector(".modal-confirm-btn")
+  const crossBtn = document.querySelector(".custome-delete")
+  const modalBackGround = document.querySelector(".modal-background")
+
+  cancleBtn.addEventListener("click",(e)=> {
+    if(modal.classList.contains("modal-show")) {
+      modal.classList.remove("modal-show");
+      modal.classList.add("modal-hide");
+      modalBackGround.classList.remove("modal-background-color")
+    }
+  })
+
+  crossBtn.addEventListener("click",(e)=> {
+    if(modal.classList.contains("modal-show")) {
+      modal.classList.remove("modal-show");
+      modal.classList.add("modal-hide");
+      modalBackGround.classList.remove("modal-background-color")
+    }
+  })
+
+  yesBtn.addEventListener("click", (e)=> {
+    if(modal.classList.contains("modal-show")) {
+      modal.classList.remove("modal-show");
+      modal.classList.add("modal-hide");
+      modalBackGround.classList.remove("modal-background-color")
+      localStorage.removeItem(`cart-info`);
+      displayFetchDataOnscreen()
+      fetchDataOnCart()
+    }
+  })
+
+
 }

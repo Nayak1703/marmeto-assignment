@@ -5,6 +5,11 @@
   font-family: "Poppins", serif;
 }
 
+body {
+  position: relative;
+  overflow-x: hidden;
+}
+
 /* =====>  NAVBAR  <===== */
 #navbar {
   min-height: 60px;
@@ -219,6 +224,7 @@ input::-webkit-inner-spin-button {
 }
 
 #cart-total {
+  margin-top: 100px;
   padding: 50px 20px;
   width: 30%;
   background-color: #f9f1e7;
@@ -281,7 +287,76 @@ input::-webkit-inner-spin-button {
   font-size: 0.9rem;
   color: #898989;
 }
-
+.modal {
+  position: absolute;
+  display: none;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border: 1px solid rgb(97, 97, 97);
+  width: 40%;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  font-weight: 500;
+  background-color: #ffffff;
+}
+.modal-content {
+  position: relative;
+}
+.custome-delete {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.custome-delete:hover {
+  color:#7c601d !important;
+}
+.modal-text {
+  padding: 15px 0;
+}
+.modal-btns{
+  display: flex;
+  justify-content: flex-end;
+  column-gap: 10px;
+}
+.modal-cancle-btn, .modal-confirm-btn {
+  border: 1px solid black;
+  padding: 7px;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+.modal-confirm-btn {
+  background-color: rgb(65, 214, 65);
+  color: #ffffff;
+}
+.modal-confirm-btn:hover {
+  background-color: rgb(17, 160, 17);
+  transition: 0.2s ease;
+}
+.modal-cancle-btn {
+  border: 1px solid #7c601d;
+}
+.modal-cancle-btn:hover {
+  background-color:#b89952;
+  transition: 0.2s ease;
+}
+.modal-show {
+  display: block;
+}
+.modal-hide {
+  display: none;
+}
+.modal-background-color {
+  position: absolute;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.171);
+  width: 100vw;
+  min-height: 100%;
+  z-index: 1;
+}
 
 @media only screen and (max-width: 768px) {
   /* =====>  NAVBAR  <===== */
@@ -332,6 +407,9 @@ input::-webkit-inner-spin-button {
   }
   .service {
     width: 200px;
+  }
+  .modal {
+    width: 80%;
   }
 }
 
