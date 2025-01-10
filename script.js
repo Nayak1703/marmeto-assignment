@@ -24,10 +24,15 @@ hamburgerLogo.addEventListener("click", function (event) {
 let url =
   "https://cdn.shopify.com/s/files/1/0883/2188/4479/files/apiCartData.json?v=1728384889";
 async function fetchingCart(url) {
-  const response = await fetch(url);
-  const data = await response.json();
-  addCartDetailsInLocalstorage(data.items);
-  handleDelete();
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    addCartDetailsInLocalstorage(data.items);
+    handleDelete();
+  } catch (error) {
+    console.error(error);
+  } finally {
+  }
 }
 fetchingCart(url);
 
@@ -56,32 +61,41 @@ const displayFetchDataOnscreen = () => {
   if (data) {
     const tr = document.createElement("tr");
     tr.classList.add("product-details-row");
-    let totalPrice = ((data.quantity * data.price) /100).toString();
-    let formattedPrice = new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
+    let totalPrice = ((data.quantity * data.price) / 100).toString();
+    let formattedPrice = new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
       minimumFractionDigits: 2,
-  }).format(totalPrice);
-
+    }).format(totalPrice);
 
     tr.innerHTML = `
               <td style=" display:flex; justify-content: center; align-items: center"><div class="product-img-div"><img src="${
                 data.image
               }" alt="product-img"/></div></td>
               <td><p class="product-name">${data.title}</p></td>
-              <td><p class="product-price">${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}</p></td>
+              <td><p class="product-price">${formattedPrice.slice(
+                0,
+                1
+              )} ${formattedPrice.slice(1)}</p></td>
               <td><input type="number" class="product-quanity" value="${
                 data.quantity
               }"/></td>
-              <td><p class="product-subtotal">${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}</p></td>
+              <td><p class="product-subtotal">${formattedPrice.slice(
+                0,
+                1
+              )} ${formattedPrice.slice(1)}</p></td>
               <td><i class="fa-solid fa-trash fa-lg product-delete" style="color: #b88e2f;"></i></td>
             `;
     productdetails.appendChild(tr);
 
+    // const div = document.createElement("div")
+    // div.classList.add("loader")
+    // tr.appendChild(div)
+
     let inputField = document.querySelector(".product-quanity");
     changeSubtotal(inputField, data.price);
   } else {
-    productdetails.innerHTML=""
+    productdetails.innerHTML = "";
   }
 
   fetchDataOnCart();
@@ -97,97 +111,98 @@ const changeSubtotal = (htmlElement, price) => {
     };
 
     localStorage.setItem(`cart-info`, JSON.stringify(getDataFromLocalStorage));
-    let totalPrice = ((e.target.value * price)/100).toString();
+    let totalPrice = ((e.target.value * price) / 100).toString();
 
-    let formattedPrice = new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
+    let formattedPrice = new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
       minimumFractionDigits: 2,
-  }).format(totalPrice);
+    }).format(totalPrice);
 
-    document.querySelector(".product-subtotal").textContent = `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`;
+    document.querySelector(
+      ".product-subtotal"
+    ).textContent = `${formattedPrice.slice(0, 1)} ${formattedPrice.slice(1)}`;
 
-    fetchDataOnCart()
+    fetchDataOnCart();
   });
 };
 
 // handle delete
 const handleDelete = () => {
   const deleteBtn = document.querySelector(".product-delete");
-  const modal = document.querySelector(".modal")
-  const modalBackGround = document.querySelector(".modal-background")
+  const modal = document.querySelector(".modal");
+  const modalBackGround = document.querySelector(".modal-background");
 
   deleteBtn.addEventListener("click", () => {
     modal.classList.remove("modal-hide");
-    modal.classList.add('modal-show')
-    modalBackGround.classList.add("modal-background-color")
-    modalFuncationality(modal)
+    modal.classList.add("modal-show");
+    modalBackGround.classList.add("modal-background-color");
+    modalFuncationality(modal);
   });
 };
 
 // fetch data on cart
 const fetchDataOnCart = () => {
   let data = JSON.parse(localStorage.getItem(`cart-info`));
-  const subTotalCart = document.querySelector(".cart-subTotal-price .cart-subtotal")
-  const totalCart = document.querySelector(".cart-total-price .cart-subtotal")
+  const subTotalCart = document.querySelector(
+    ".cart-subTotal-price .cart-subtotal"
+  );
+  const totalCart = document.querySelector(".cart-total-price .cart-subtotal");
 
   let totalPrice = 0;
-  if(data) {
-    totalPrice = ((data.quantity * data.price)/100).toString();
+  if (data) {
+    totalPrice = ((data.quantity * data.price) / 100).toString();
   }
-  
-  let formattedPrice = new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
+
+  let formattedPrice = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
     minimumFractionDigits: 2,
-}).format(totalPrice);
+  }).format(totalPrice);
 
   subTotalCart.textContent = `${
-      totalPrice != 0
-        ? `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`
-        : "₹ 0"
-    }`;
+    totalPrice != 0
+      ? `${formattedPrice.slice(0, 1)} ${formattedPrice.slice(1)}`
+      : "₹ 0"
+  }`;
   totalCart.textContent = `${
-      totalPrice != 0
-        ? `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`
-        : "₹ 0"
-    }`;
-}
-
+    totalPrice != 0
+      ? `${formattedPrice.slice(0, 1)} ${formattedPrice.slice(1)}`
+      : "₹ 0"
+  }`;
+};
 
 // modal
 const modalFuncationality = (modal) => {
-  const cancleBtn = document.querySelector(".modal-cancle-btn")
-  const yesBtn = document.querySelector(".modal-confirm-btn")
-  const crossBtn = document.querySelector(".custome-delete")
-  const modalBackGround = document.querySelector(".modal-background")
+  const cancleBtn = document.querySelector(".modal-cancle-btn");
+  const yesBtn = document.querySelector(".modal-confirm-btn");
+  const crossBtn = document.querySelector(".custome-delete");
+  const modalBackGround = document.querySelector(".modal-background");
 
-  cancleBtn.addEventListener("click",(e)=> {
-    if(modal.classList.contains("modal-show")) {
+  cancleBtn.addEventListener("click", (e) => {
+    if (modal.classList.contains("modal-show")) {
       modal.classList.remove("modal-show");
       modal.classList.add("modal-hide");
-      modalBackGround.classList.remove("modal-background-color")
+      modalBackGround.classList.remove("modal-background-color");
     }
-  })
+  });
 
-  crossBtn.addEventListener("click",(e)=> {
-    if(modal.classList.contains("modal-show")) {
+  crossBtn.addEventListener("click", (e) => {
+    if (modal.classList.contains("modal-show")) {
       modal.classList.remove("modal-show");
       modal.classList.add("modal-hide");
-      modalBackGround.classList.remove("modal-background-color")
+      modalBackGround.classList.remove("modal-background-color");
     }
-  })
+  });
 
-  yesBtn.addEventListener("click", (e)=> {
-    if(modal.classList.contains("modal-show")) {
+  yesBtn.addEventListener("click", (e) => {
+    if (modal.classList.contains("modal-show")) {
       modal.classList.remove("modal-show");
       modal.classList.add("modal-hide");
-      modalBackGround.classList.remove("modal-background-color")
+      modalBackGround.classList.remove("modal-background-color");
       localStorage.removeItem(`cart-info`);
-      displayFetchDataOnscreen()
-      fetchDataOnCart()
+      displayFetchDataOnscreen();
+      fetchDataOnCart();
     }
-  })
-
-
-}
+  });
+};

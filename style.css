@@ -212,6 +212,18 @@ input::-webkit-inner-spin-button {
   -moz-appearance: textfield;
 }
 
+.loader {
+  width: 25px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px solid lightblue;
+  border-right-color: orange;
+  animation: l2 1s infinite linear;
+  text-align: center;
+}
+@keyframes l2 {to{transform: rotate(1turn)}}
+
+
 .product-name, .product-price {
   color: #9F9F9F;
 }
@@ -224,7 +236,6 @@ input::-webkit-inner-spin-button {
 }
 
 #cart-total {
-  margin-top: 100px;
   padding: 50px 20px;
   width: 30%;
   background-color: #f9f1e7;
@@ -358,6 +369,9 @@ input::-webkit-inner-spin-button {
   z-index: 1;
 }
 
+
+
+
 @media only screen and (max-width: 768px) {
   /* =====>  NAVBAR  <===== */
   #navbar {
@@ -397,6 +411,7 @@ input::-webkit-inner-spin-button {
     width: 100%;
   }
   #cart-total {
+    margin-top: 100px;
     width: 100%;
   }
   .services-display {
