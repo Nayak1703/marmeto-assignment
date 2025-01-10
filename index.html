@@ -1,22 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <!-- REPLACE THIS WITH YOUR PROJECT NAME. EXAMPLE - Category tabs -->
-    <title>Coding Assesment L2 boilerplate</title>
+    <title>Carts</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-</head>
+  <body>
+    <nav id="navbar">
+      <div id="navbar-brand">
+        <img id="nav-logo" src="resource/logo.png" alt="logo" />
+        <div id="brand-name-parent">
+          <p id="brand-name">Marmeto</p>
+        </div>
+      </div>
 
-<body>
-    <!-- Your code goes here -->
-    <div class="container">
-        <a href="https://github.com/mmdmrishabh/Coding-assessment-l2-Boilerplate-code/blob/main/Readme.md" target="_blank">Read how to work with boilerplate</a>
-    </div>
-    <!-- Happy coding 😊 -->
+      <div id="navbar-list">
+        <ul>
+          <li class="nav-item">Home</li>
+          <li class="nav-item">Shop</li>
+          <li class="nav-item">About</li>
+          <li class="nav-item">Contact</li>
+        </ul>
+      </div>
+
+      <div id="nav-icons-hamburger">
+        <div id="nav-icons-parent">
+          <img
+            class="nav-icons"
+            src="./resource/search-icon.png"
+            alt="search-icon"
+          />
+          <img
+            class="nav-icons"
+            src="./resource/like-icon.png"
+            alt="like-icon"
+          />
+          <img
+            class="nav-icons"
+            src="./resource/cart-icon.png"
+            alt="cart-icon"
+          />
+        </div>
+
+        <div id="hamburger-logo">
+          <i class="fa-xl fa-solid fa-bars"></i>
+        </div>
+      </div>
+    </nav>
+    <nav id="navbar-mobile"></nav>
+
+    <section id="hero-section">
+      <div class="background"></div>
+      <div class="hero-content">
+        <img class="hero-sec-logo" src="./resource/logo.png" alt="brand-logo" />
+        <h1 class="hero-sec-heading">Cart</h1>
+        <div class="hero-sec-info">
+          <p class="boldInfo">Home</p>
+          <img src="./resource/arrow.png" />
+          <p>Cart</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cart-section">
+      <div id="products">
+        <table class="products-table">
+          <thead class="products-head">
+            <tr class="product-head-row">
+              <th class="empty-div"><div></div></th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Qunatity</th>
+              <th>Subtotal</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody class="products-details">
+          </tbody>
+          
+        </table>
+      </div>
+      <div id="cart-total">
+        <h2 class="cart-total-heading">Cart Totals</h2>
+        <div class="cart-total-info">
+          <div class="cart-subTotal-price">
+            <p class="cart-subtotal-title">Subtotal</p>
+            <p class="cart-subtotal">Subtotal</p>
+          </div>
+          <div class="cart-total-price">
+            <p class="cart-subtotal-title">Total</p>
+            <p class="cart-subtotal">Total</p>
+          </div>
+        </div>
+
+        <div class="checkOutBtn">
+          <p class="checkOutBtn-text">Check Out</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="services-display">
+      <div class="service">
+        <div class="service-logo"><img src="./resource/trophy.png" alt="service-logo"/></div>
+        <div class="service-details">
+          <p class="service-heading">High Quality</p>
+          <p class="service-desc">crafted from top materials</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-logo"><img src="./resource/guarantee.png" alt="service-logo"/></div>
+        <div class="service-details">
+          <p class="service-heading">Warranty Protection</p>
+          <p class="service-desc">Over 2 years</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-logo"><img src="./resource/shipping.png" alt="service-logo"/></div>
+        <div class="service-details">
+          <p class="service-heading">Free Shipping</p>
+          <p class="service-desc">Order over 150 $</p>
+        </div>
+      </div>
+      <div class="service">
+        <div class="service-logo"><img src="./resource/customer-support.png" alt="service-logo"/></div>
+        <div class="service-details">
+          <p class="service-heading">24 / 7 Support</p>
+          <p class="service-desc">Dedicated support</p>
+        </div>
+      </div>
+    </section>
+
     <script src="./script.js"></script>
-</body>
-
+  </body>
 </html>
+
+
