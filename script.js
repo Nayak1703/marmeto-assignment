@@ -69,11 +69,11 @@ const displayFetchDataOnscreen = () => {
                 data.image
               }" alt="product-img"/></div></td>
               <td><p class="product-name">${data.title}</p></td>
-              <td><p class="product-price">${formattedPrice}</p></td>
+              <td><p class="product-price">${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}</p></td>
               <td><input type="number" class="product-quanity" value="${
                 data.quantity
               }"/></td>
-              <td><p class="product-subtotal">${formattedPrice}</p></td>
+              <td><p class="product-subtotal">${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}</p></td>
               <td><i class="fa-solid fa-trash fa-lg product-delete" style="color: #b88e2f;"></i></td>
             `;
     productdetails.appendChild(tr);
@@ -105,7 +105,7 @@ const changeSubtotal = (htmlElement, price) => {
       minimumFractionDigits: 2,
   }).format(totalPrice);
 
-    document.querySelector(".product-subtotal").textContent = formattedPrice;
+    document.querySelector(".product-subtotal").textContent = `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`;
 
     fetchDataOnCart(getDataFromLocalStorage)
   });
@@ -133,12 +133,12 @@ const fetchDataOnCart = (data) => {
 
   subTotalCart.textContent = `${
       totalPrice != 0
-        ? `${formattedPrice}`
+        ? `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`
         : "₹ 0"
     }`;
   totalCart.textContent = `${
       totalPrice != 0
-        ? `${formattedPrice}`
-        : "₹. 0"
+        ? `${formattedPrice.slice(0,1)} ${formattedPrice.slice(1)}`
+        : "₹ 0"
     }`;
 }
