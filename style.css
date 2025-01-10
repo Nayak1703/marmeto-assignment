@@ -213,6 +213,10 @@ input::-webkit-inner-spin-button {
 }
 
 .loader {
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  /* transform: translate(-50%, -50%); */
   width: 25px;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -222,6 +226,13 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 @keyframes l2 {to{transform: rotate(1turn)}}
+
+.loader-show{
+  display: block;
+} 
+.loader-hide {
+  display: none;
+}
 
 
 .product-name, .product-price {
@@ -409,6 +420,7 @@ input::-webkit-inner-spin-button {
   }
   #products {
     width: 100%;
+    position: relative;
   }
   #cart-total {
     margin-top: 100px;

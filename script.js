@@ -24,6 +24,8 @@ hamburgerLogo.addEventListener("click", function (event) {
 let url =
   "https://cdn.shopify.com/s/files/1/0883/2188/4479/files/apiCartData.json?v=1728384889";
 async function fetchingCart(url) {
+  const load = document.querySelector(".loader")
+  load.classList.add("loader-show")
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -32,6 +34,10 @@ async function fetchingCart(url) {
   } catch (error) {
     console.error(error);
   } finally {
+    if(load.classList.contains("loader-show")) {
+      load.classList.remove("loader-show")
+      load.classList.add("loader-hide")
+    }
   }
 }
 fetchingCart(url);
